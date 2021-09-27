@@ -28,7 +28,6 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 - _TODO: What does Metricbeat record?_
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
@@ -36,34 +35,37 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | Web-1    | Web Server | 10.0.0.5  | Linux           |
 | Web-2    | Web Server | 10.0.0.6  | Linux           |
 | Web-3    | Web Server | 10.0.0.7  | Linux           |
+| ELK-Server | ELK Server | 10.1.0.4 | Linux           |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- 65.94.89.103
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by the Ansible container running in the Jump Box VM (10.0.0.4).
 
 A summary of the access policies in place can be found in the table below.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Jump Box | Yes                 | 65.94.89.103         |
+| Web-1    | No                  | 10.0.0.4 10.1.0.4    |
+| Web-2    | No                  | 10.0.0.4 10.1.0.4    |
+| Web-3    | No                  | 10.0.0.4 10.1.0.4    |
+| ELK-Server | Yes               | 65.94.89.103 10.0.0.4 |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because in the case of existing multiple machines running the same ELK configuration, ansible allows us to automatically deploy identical configuration to any number of machines by using IaC text files.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Update the `apt` library and install docker.io
+- Install the python package installer known as `pip`
+- Install the docker package using `pip`
+- Increase the virtual memory to `262144` and ensure it does so automatically upon restarting the machine
+- Download and launch the docker ELK container, expose the necessary ports for the container to receive the data from the Web servers, ensure the docker container runs after any reboot of the system and finally, enable the service.
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
