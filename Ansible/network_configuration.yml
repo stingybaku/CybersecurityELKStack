@@ -83,7 +83,7 @@
     systemd:
       name: docker
       enabled: yes
-	  
+
 # Filebeat Installation
 
 - name: Installing and launching filebeat
