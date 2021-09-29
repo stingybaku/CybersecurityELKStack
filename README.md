@@ -78,8 +78,13 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- `Filebeat` collects Apache logs to help analyze the requests made to the web servers
-- `Metricbeat` collects metrics in relation to CPU usage, memory, file system and overall system performance, as well as services running in the web servers
+- `Filebeat` collects Apache logs to help analyze the requests made to the web servers (as seen in the image below)
+
+![Filebeat](Images/Filebeat_Incoming_Data.png)
+
+- `Metricbeat` collects metrics in relation to CPU usage, memory, file system and overall system performance, as well as services running in the web servers (as seen in the image below)
+
+![Metricbeat](Images/Metricbeat_Incoming_Data_1.png)
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
